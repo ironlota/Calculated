@@ -23,7 +23,7 @@ int main()
     boolean valid = true;
     int idx = 0;
     float res;
-    char s[30];
+    char s[50];
     scanf("%s", s);
     panjangKata = strlen(s);
     Calculate(s, &idx, &res, &valid);
@@ -47,16 +47,21 @@ void Calculate(char* st, int*idx, float * result, boolean *valid) {
     {
         float temp;
         TimesDiv(st, idx, result,valid);
-        if (st[*idx] == '+')
+        while (st[*idx] == '+' || st[*idx] == '-')
         {
-            (*idx)++;
-            Calculate(st,idx,&temp,valid);
-            *result += temp;
-        } else if (st[*idx] == '-')
-        {
-            (*idx)++;
-            Calculate(st,idx,&temp,valid);
-            *result -= temp;
+            if (st[*idx] == '+')
+            {
+                (*idx)++;
+                TimesDiv(st,idx,&temp,valid);
+                *result += temp;
+                temp = 0;
+            } else if (st[*idx] == '-')
+            {
+                (*idx)++;
+                TimesDiv(st,idx,&temp,valid);
+                *result -= temp;
+                temp = 0;
+            }
         }
     } else {
         return;
@@ -66,16 +71,21 @@ void Calculate(char* st, int*idx, float * result, boolean *valid) {
 void TimesDiv(char* st,int* idx, float* result, boolean *valid) {
     float temp;
     Sign(st,idx,result,valid);
-    if (st[*idx] == '*')
+    while (st[*idx] == '*' || st[*idx] == '/')
     {
-        (*idx)++;
-        TimesDiv(st,idx,&temp,valid);
-        (*result) *= temp;
-    } else if (st[*idx] == '/')
-    {
-        (*idx)++;
-        TimesDiv(st,idx,&temp,valid);
-        (*result) /= temp;
+        if (st[*idx] == '*')
+        {
+            (*idx)++;
+            Sign(st,idx,&temp,valid);
+            (*result) *= temp;
+            temp = 0;
+        } else if (st[*idx] == '/')
+        {
+            (*idx)++;
+            Sign(st,idx,&temp,valid);
+            (*result) /= temp;
+            temp = 0;
+        }
     }
 }
 
@@ -103,6 +113,7 @@ void Sign(char* st,int* idx, float* result, boolean *valid) {
                 FloatNumber(st,idx,&temp);
             }
             *result = ((*result)+temp)*x;
+            temp = 0;
         }
         else
         {
@@ -132,4 +143,5 @@ void FloatNumber(char* st,int* idx, float* result) {
         (*idx)++;
     }
     *result = n;
+    n = 0;
 }
