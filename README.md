@@ -23,7 +23,7 @@ Wget (or another downloader application)
 A step by step series of examples that tell you have to get a development env running
 
 ```
-wget https://github.com/ironlota/Calculated/archive/master.zip
+wget https://github.com/rayandrews/Calculated/archive/master.zip
 unzip master.zip
 cd Calculated-master
 make
@@ -68,7 +68,7 @@ cd bin
 
 ## Authors
 
-* **Ray Andrew** - [Ironlota](https://github.com/ironlota)
+* **Ray Andrew** - [Ray Andrew](https://github.com/rayandrews)
 * **Winarto** - [YoWinarto](https://github.com/yowinarto)
 
 ## License
